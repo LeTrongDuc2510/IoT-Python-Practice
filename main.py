@@ -1,10 +1,14 @@
 import sys
+import random
+import time
+from Adafruit_IO import MQTTClient
+
 from private_Info import *
 # this file stores the private info
 # 1. AIO_FEED_ID
 # 2. AIO_USERNAME 
 # 3. AIO_KEY
-from Adafruit_IO import MQTTClient
+
 
 
 def connected(client):
@@ -30,4 +34,7 @@ client.connect()
 client.loop_background()
 
 while True :
-    pass
+    temp = random.randint(0,50)
+    print("Update temp : ", temp)
+    client.publish(AIO_FEED_ID, value = temp)
+    time.sleep(2)
